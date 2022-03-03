@@ -1,17 +1,14 @@
-//
-//  WorkMeOutApp.swift
-//  WorkMeOut
-//
-//  Created by Andrew French on 17/02/22.
-//
-
 import SwiftUI
 
 @main
 struct WorkMeOutApp: App {
+    @StateObject var store = Store()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView()
+                .edgesIgnoringSafeArea([.top, .bottom])
+                .environmentObject(store)
         }
     }
 }
