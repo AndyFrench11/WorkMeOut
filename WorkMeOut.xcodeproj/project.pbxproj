@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		72032C3227D1A5A9001B2E36 /* CreateNewWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72032C3127D1A5A9001B2E36 /* CreateNewWorkoutView.swift */; };
+		72032C3427D1A639001B2E36 /* EmojiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72032C3327D1A639001B2E36 /* EmojiTextField.swift */; };
+		72032C3627D1B7D7001B2E36 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72032C3527D1B7D7001B2E36 /* TagView.swift */; };
+		72032C3927D4A48D001B2E36 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 72032C3827D4A48D001B2E36 /* SwiftUICharts */; };
 		7235780D27BDF85E0013967E /* WorkMeOutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7235780C27BDF85E0013967E /* WorkMeOutApp.swift */; };
 		7235780F27BDF85E0013967E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7235780E27BDF85E0013967E /* HomeView.swift */; };
 		7235781127BDF85F0013967E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7235781027BDF85F0013967E /* Assets.xcassets */; };
@@ -17,6 +21,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		72032C3027D1A4B4001B2E36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		72032C3127D1A5A9001B2E36 /* CreateNewWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewWorkoutView.swift; sourceTree = "<group>"; };
+		72032C3327D1A639001B2E36 /* EmojiTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTextField.swift; sourceTree = "<group>"; };
+		72032C3527D1B7D7001B2E36 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		7235780927BDF85E0013967E /* WorkMeOut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkMeOut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7235780C27BDF85E0013967E /* WorkMeOutApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkMeOutApp.swift; sourceTree = "<group>"; };
 		7235780E27BDF85E0013967E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -32,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72032C3927D4A48D001B2E36 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +66,7 @@
 		7235780B27BDF85E0013967E /* WorkMeOut */ = {
 			isa = PBXGroup;
 			children = (
+				72032C3027D1A4B4001B2E36 /* Info.plist */,
 				7235780C27BDF85E0013967E /* WorkMeOutApp.swift */,
 				7235780E27BDF85E0013967E /* HomeView.swift */,
 				7235781027BDF85F0013967E /* Assets.xcassets */,
@@ -64,6 +74,9 @@
 				7235781A27BDFAB20013967E /* Store.swift */,
 				7235781C27BDFDB50013967E /* WorkoutView.swift */,
 				72F29DA627D098010046BD87 /* CreateNewActivityView.swift */,
+				72032C3127D1A5A9001B2E36 /* CreateNewWorkoutView.swift */,
+				72032C3327D1A639001B2E36 /* EmojiTextField.swift */,
+				72032C3527D1B7D7001B2E36 /* TagView.swift */,
 			);
 			path = WorkMeOut;
 			sourceTree = "<group>";
@@ -92,6 +105,9 @@
 			dependencies = (
 			);
 			name = WorkMeOut;
+			packageProductDependencies = (
+				72032C3827D4A48D001B2E36 /* SwiftUICharts */,
+			);
 			productName = WorkMeOut;
 			productReference = 7235780927BDF85E0013967E /* WorkMeOut.app */;
 			productType = "com.apple.product-type.application";
@@ -120,6 +136,9 @@
 				Base,
 			);
 			mainGroup = 7235780027BDF85E0013967E;
+			packageReferences = (
+				72032C3727D4A48D001B2E36 /* XCRemoteSwiftPackageReference "ChartView" */,
+			);
 			productRefGroup = 7235780A27BDF85E0013967E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -147,10 +166,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				7235780F27BDF85E0013967E /* HomeView.swift in Sources */,
+				72032C3427D1A639001B2E36 /* EmojiTextField.swift in Sources */,
 				72F29DA727D098010046BD87 /* CreateNewActivityView.swift in Sources */,
 				7235781B27BDFAB20013967E /* Store.swift in Sources */,
+				72032C3227D1A5A9001B2E36 /* CreateNewWorkoutView.swift in Sources */,
 				7235781D27BDFDB50013967E /* WorkoutView.swift in Sources */,
 				7235780D27BDF85E0013967E /* WorkMeOutApp.swift in Sources */,
+				72032C3627D1B7D7001B2E36 /* TagView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,9 +306,9 @@
 				DEVELOPMENT_TEAM = DSGJ8LM663;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WorkMeOut/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -313,9 +335,9 @@
 				DEVELOPMENT_TEAM = DSGJ8LM663;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WorkMeOut/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -353,6 +375,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		72032C3727D4A48D001B2E36 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		72032C3827D4A48D001B2E36 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 72032C3727D4A48D001B2E36 /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7235780127BDF85E0013967E /* Project object */;
 }

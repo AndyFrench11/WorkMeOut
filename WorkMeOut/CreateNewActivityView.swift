@@ -20,6 +20,7 @@ struct CreateNewActivityView: View {
         NavigationView {
             VStack(spacing: 0) {
                 Form {
+                    // TODO - Repeat group for number of sets
                     Section(header: Text("Details")) {
                         TextField("Enter a weight...", text: $weightTextField)
                         TextField("Enter a number of reps...", text: $repsTextField)
@@ -30,8 +31,7 @@ struct CreateNewActivityView: View {
                 Button("Create Activity") {
                     store.createNewActivity(
                         workoutId: workoutId,
-                        weight: Int(weightTextField)!,
-                        reps: Int(repsTextField)!
+                        sets: []
                     )
                     dismissModal()
                 }
