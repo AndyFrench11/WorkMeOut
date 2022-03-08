@@ -7,7 +7,6 @@ struct WorkoutView: View {
     var workoutId: Int
     @State var isPresentingForm: Bool = false
     @EnvironmentObject var store: Store
-    var demoData: [Double] = [8, 2, 4, 6, 12, 9, 2]
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -17,15 +16,16 @@ struct WorkoutView: View {
                 focusType: workout.focusType,
                 movementType: workout.movementType
             )
+            .padding(.horizontal, 16)
 
             LineChartView(
-                data: [8,23,54,32,12,37,7,23,43],
+                data: workout.getAverageWeight(),
                 title: "Latest Data",
-                legend: "INSERT LAST UPDATED",
+                legend: workout.lastWorkOutDate != nil ? "\(workout.lastWorkOutDate)" : "Not exercised yet",
                 form: ChartForm.extraLarge,
                 dropShadow: false
             )
-                .padding()
+            .padding()
 
 
             List {
@@ -40,10 +40,9 @@ struct WorkoutView: View {
                         }
 
                         VStack(alignment: .leading) {
-                            // TODO Get average from sets
-                            Text("INSERT AVERAGEkg")
+                            Text("\(activity.getAverageWeight())kg")
                                 .fontWeight(.bold)
-                            Text("INSERT AVERAGE")
+                            Text("\(activity.getAverageReps())")
                                 .fontWeight(.bold)
 
                         }

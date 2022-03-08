@@ -47,7 +47,27 @@ var workoutData: [Workout] = [
         name: "Chest Press",
         bodyPart: .chest,
         focusType: .compound,
-        movementType: .push
+        movementType: .push,
+        activities: [
+            .init(
+                sets: [
+                    .init(weight: 5, reps: 12),
+                    .init(weight: 5, reps: 12),
+                    .init(weight: 5, reps: 12),
+                    .init(weight: 5, reps: 12),
+                ],
+                date: Date.now
+            ),
+            .init(
+                sets: [
+                    .init(weight: 10, reps: 12),
+                    .init(weight: 12, reps: 12),
+                    .init(weight: 8, reps: 12),
+                    .init(weight: 9, reps: 12),
+                ],
+                date: Date.now
+            )
+        ]
     ),
     .init(name: "Squats",         bodyPart: .legs,      focusType: .compound,       movementType: .push),
     .init(name: "Bicep Curls",    bodyPart: .arms,      focusType: .isolation,      movementType: .pull),
@@ -160,6 +180,18 @@ struct Activity: Identifiable, Hashable {
         var weight: Int
         var reps: Int
     }
+
+    // TODO: Update to use reduce function
+    // TODO: Update to only 2 dp
+    func getAverageWeight() -> Double {
+        return 1.1
+    }
+
+    // TODO: Update to use reduce function
+    // TODO: Update to only 2 dp
+    func getAverageReps() -> Double {
+        return 2.5
+    }
 }
 
 struct Workout: Identifiable, Hashable {
@@ -176,4 +208,10 @@ struct Workout: Identifiable, Hashable {
     var focusType: FocusType
     var movementType: MovementType
     var activities: [Activity] = []
+
+    func getAverageWeight() -> [Double] {
+        return activities.map { activity in
+            activity.getAverageWeight()
+        }
+    }
 }

@@ -10,12 +10,12 @@ struct TagView: View {
             Text(text)
             Text(emoji)
         }
-        .font(.subheadline)
-        .foregroundColor(.white)
+        .font(.caption)
+        .foregroundColor(.primary)
         .padding(.all, 4)
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .foregroundColor(Color.secondary.opacity(0.6))
+                .stroke(Color.secondary.opacity(0.4))
         )
     }
 }

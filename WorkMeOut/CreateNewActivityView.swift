@@ -2,8 +2,7 @@ import SwiftUI
 
 struct CreateNewActivityView: View {
     @Environment(\.presentationMode) var presentationMode
-    @State var weightTextField: String = ""
-    @State var repsTextField: String = ""
+    @State var sets: [(String, String)] = []
     @EnvironmentObject var store: Store
     var workoutId: Int
 
@@ -12,26 +11,40 @@ struct CreateNewActivityView: View {
         presentationMode.wrappedValue.dismiss()
     }
 
+    // TODO: Extend to check if numeric all strings aren't empty and valid
     func checkIsDisabled() -> Bool {
-        return weightTextField.isEmpty || repsTextField.isEmpty
+        return sets.isEmpty
     }
 
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
                 Form {
-                    // TODO - Repeat group for number of sets
-                    Section(header: Text("Details")) {
-                        TextField("Enter a weight...", text: $weightTextField)
-                        TextField("Enter a number of reps...", text: $repsTextField)
+                    ForEach(0 ..< sets.count, id: \.self) { setNumber in
+                        Section(header: Text("Set \(setNumber + 1)")) {
+                            TextField("Enter a weight...", text: $sets[setNumber].0)
+                            TextField("Enter a number of reps...", text: $sets[setNumber].1)
+                            
+                            Button("Remove set") {
+                                sets.remove(at: setNumber)
+                            }
+                            .foregroundColor(.red)
+                        }
+                        .keyboardType(.numberPad)
                     }
-                    .keyboardType(.numberPad)
+                    
+
+                    Button("Add new set") {
+                        sets.append(("", ""))
+                    }
                 }
 
                 Button("Create Activity") {
                     store.createNewActivity(
                         workoutId: workoutId,
-                        sets: []
+                        sets: sets.map({ (weight, reps) in
+                            .init(weight: Int(weight)!, reps: Int(reps)!)
+                        })
                     )
                     dismissModal()
                 }
