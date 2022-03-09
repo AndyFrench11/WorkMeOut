@@ -14,14 +14,29 @@ class Store: ObservableObject {
                 date: Date.now
             )
         )
+        Store.save(workouts: workouts) { result in
+            if case .failure(let error) = result {
+                fatalError(error.localizedDescription)
+            }
+        }
      }
 
      func removeActivity(workoutId: Int, offset: IndexSet) {
         workouts[workoutId].activities.remove(atOffsets: offset)
+        Store.save(workouts: workouts) { result in
+            if case .failure(let error) = result {
+                fatalError(error.localizedDescription)
+            }
+        }
      }
 
      func removeWorkout(offset: IndexSet) {
         workouts.remove(atOffsets: offset)
+        Store.save(workouts: workouts) { result in
+            if case .failure(let error) = result {
+                fatalError(error.localizedDescription)
+            }
+        }
      }
 
      func createNewWorkout(
@@ -38,6 +53,60 @@ class Store: ObservableObject {
                 movementType: movementType
             )
         )
+        Store.save(workouts: workouts) { result in
+            if case .failure(let error) = result {
+                fatalError(error.localizedDescription)
+            }
+        }
+     }
+
+     private static func fileURL() throws -> URL {
+        try FileManager.default.url(
+            for: .documentDirectory,
+            in: .userDomainMask,
+            appropriateFor: nil,
+            create: false
+        )
+        .appendingPathComponent("workouts.data")
+     }
+
+    static func load(completion: @escaping (Result<[Workout], Error>) -> Void) {
+         DispatchQueue.global(qos: .background).async {
+             do {
+                let fileURL = try fileURL()
+                guard let file = try? FileHandle(forReadingFrom: fileURL) else {
+                    DispatchQueue.main.async {
+                        completion(.success([]))
+                    }
+                    return
+                }
+                let workouts = try JSONDecoder().decode([Workout].self, from: file.availableData)
+                DispatchQueue.main.async {
+                    completion(.success(workouts))
+                }
+             } catch {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+             }
+         }
+     }
+
+     static func save(workouts: [Workout], completion: @escaping (Result<Int, Error>) -> Void) {
+        DispatchQueue.global(qos: .background).async {
+            do {
+                let data = try JSONEncoder().encode(workouts)
+                let outfile = try fileURL()
+                try data.write(to: outfile)
+                DispatchQueue.main.async {
+                    completion(.success(workouts.count))
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+            }
+        }
      }
 
 }
@@ -75,7 +144,7 @@ var workoutData: [Workout] = [
 ]
 
 
-enum BodyPart: CaseIterable {
+enum BodyPart: CaseIterable, Codable {
     case arms
     case legs
     case shoulders
@@ -114,7 +183,7 @@ enum BodyPart: CaseIterable {
     }
 }
 
-enum FocusType: CaseIterable {
+enum FocusType: CaseIterable, Codable {
     case compound
     case isolation
     case none
@@ -142,7 +211,7 @@ enum FocusType: CaseIterable {
     }
 }
 
-enum MovementType: CaseIterable {
+enum MovementType: CaseIterable, Codable {
     case push
     case pull
     case none
@@ -170,31 +239,33 @@ enum MovementType: CaseIterable {
     }
 }
 
-struct Activity: Identifiable, Hashable {
+struct Activity: Identifiable, Hashable, Codable {
     var id = UUID()
     var sets: [ActivitySet] = []
     var date: Date
 
-    struct ActivitySet: Identifiable, Hashable {
+    struct ActivitySet: Identifiable, Hashable, Codable {
         var id = UUID()
         var weight: Int
         var reps: Int
     }
 
-    // TODO: Update to use reduce function
-    // TODO: Update to only 2 dp
     func getAverageWeight() -> Double {
-        return 1.1
+        let sum = sets.reduce(0) { partialResult, activitySet in
+            partialResult + activitySet.weight
+        }
+        return Double(sum / sets.count)
     }
 
-    // TODO: Update to use reduce function
-    // TODO: Update to only 2 dp
     func getAverageReps() -> Double {
-        return 2.5
+        let sum = sets.reduce(0) { partialResult, activitySet in
+            partialResult + activitySet.reps
+        }
+        return Double(sum / sets.count)
     }
 }
 
-struct Workout: Identifiable, Hashable {
+struct Workout: Identifiable, Hashable, Codable {
     var id = UUID()
     var name: String
 
@@ -212,6 +283,19 @@ struct Workout: Identifiable, Hashable {
     func getAverageWeight() -> [Double] {
         return activities.map { activity in
             activity.getAverageWeight()
+        }
+    }
+
+    func getLastWorkoutDateString() -> String {
+        if let lastWorkOutDate = lastWorkOutDate {
+            // Create Date Formatter
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM d"
+
+            // Convert Date to String
+            return dateFormatter.string(from: lastWorkOutDate)
+        } else {
+            return "Not exercised yet"
         }
     }
 }

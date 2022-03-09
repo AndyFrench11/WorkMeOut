@@ -17,6 +17,7 @@
 		7235781427BDF85F0013967E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7235781327BDF85F0013967E /* Preview Assets.xcassets */; };
 		7235781B27BDFAB20013967E /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7235781A27BDFAB20013967E /* Store.swift */; };
 		7235781D27BDFDB50013967E /* WorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7235781C27BDFDB50013967E /* WorkoutView.swift */; };
+		72AB5EC027D961AE00FC816C /* ViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AB5EBF27D961AE00FC816C /* ViewHelpers.swift */; };
 		72F29DA727D098010046BD87 /* CreateNewActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F29DA627D098010046BD87 /* CreateNewActivityView.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +33,7 @@
 		7235781327BDF85F0013967E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7235781A27BDFAB20013967E /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		7235781C27BDFDB50013967E /* WorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutView.swift; sourceTree = "<group>"; };
+		72AB5EBF27D961AE00FC816C /* ViewHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHelpers.swift; sourceTree = "<group>"; };
 		72F29DA627D098010046BD87 /* CreateNewActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewActivityView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,6 +79,7 @@
 				72032C3127D1A5A9001B2E36 /* CreateNewWorkoutView.swift */,
 				72032C3327D1A639001B2E36 /* EmojiTextField.swift */,
 				72032C3527D1B7D7001B2E36 /* TagView.swift */,
+				72AB5EBF27D961AE00FC816C /* ViewHelpers.swift */,
 			);
 			path = WorkMeOut;
 			sourceTree = "<group>";
@@ -168,6 +171,7 @@
 				7235780F27BDF85E0013967E /* HomeView.swift in Sources */,
 				72032C3427D1A639001B2E36 /* EmojiTextField.swift in Sources */,
 				72F29DA727D098010046BD87 /* CreateNewActivityView.swift in Sources */,
+				72AB5EC027D961AE00FC816C /* ViewHelpers.swift in Sources */,
 				7235781B27BDFAB20013967E /* Store.swift in Sources */,
 				72032C3227D1A5A9001B2E36 /* CreateNewWorkoutView.swift in Sources */,
 				7235781D27BDFDB50013967E /* WorkoutView.swift in Sources */,

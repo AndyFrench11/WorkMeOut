@@ -9,24 +9,23 @@ struct WorkoutView: View {
     @EnvironmentObject var store: Store
 
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 0) {
 
             GroupedVariantTagView(
                 bodyPart: workout.bodyPart,
                 focusType: workout.focusType,
                 movementType: workout.movementType
             )
-            .padding(.horizontal, 16)
+                .padding(.horizontal, 16)
 
-            LineChartView(
-                data: workout.getAverageWeight(),
-                title: "Latest Data",
-                legend: workout.lastWorkOutDate != nil ? "\(workout.lastWorkOutDate)" : "Not exercised yet",
-                form: ChartForm.extraLarge,
-                dropShadow: false
-            )
-            .padding()
-
+            if !workout.activities.isEmpty {
+                LineView(
+                    data: workout.getAverageWeight(),
+                    title: "Latest Data",
+                    legend: "Last exercised: \(workout.getLastWorkoutDateString())"
+                )
+                    .padding(.horizontal, 16)
+            }
 
             List {
                 if workout.activities.isEmpty {
@@ -40,9 +39,9 @@ struct WorkoutView: View {
                         }
 
                         VStack(alignment: .leading) {
-                            Text("\(activity.getAverageWeight())kg")
+                            Text("\(activity.getAverageWeight(), specifier: "%.2f")kg")
                                 .fontWeight(.bold)
-                            Text("\(activity.getAverageReps())")
+                            Text("\(activity.getAverageReps(), specifier: "%.2f")")
                                 .fontWeight(.bold)
 
                         }
@@ -60,7 +59,8 @@ struct WorkoutView: View {
                     store.removeActivity(workoutId: workoutId, offset: offset)
                 }
             }
-            .listStyle(.plain)
+            .frame(maxWidth: .infinity)
+            .padding(.top, 64)
         }
         .navigationTitle("\(workout.name)")
         .toolbar {

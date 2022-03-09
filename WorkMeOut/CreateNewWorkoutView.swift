@@ -13,7 +13,11 @@ struct CreateNewWorkoutView: View {
     }
 
     func checkIsDisabled() -> Bool {
-        return nameTextField.isEmpty || bodyPartSelection.stringRepresentation.isEmpty
+        return
+            nameTextField.isEmpty ||
+            bodyPartSelection.stringRepresentation.isEmpty ||
+            focusTypeSelection.stringRepresentation.isEmpty ||
+            movementTypeSelection.stringRepresentation.isEmpty
     }
 
     var body: some View {

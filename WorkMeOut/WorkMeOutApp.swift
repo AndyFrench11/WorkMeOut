@@ -9,6 +9,16 @@ struct WorkMeOutApp: App {
             HomeView()
                 .edgesIgnoringSafeArea([.top, .bottom])
                 .environmentObject(store)
+                .onAppear {
+                    Store.load { result in
+                        switch result {
+                        case .failure(let error):
+                            fatalError(error.localizedDescription)
+                        case .success(let workouts):
+                            store.workouts = workouts
+                        }
+                    }
+                }
         }
     }
 }

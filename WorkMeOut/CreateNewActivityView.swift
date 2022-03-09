@@ -11,9 +11,17 @@ struct CreateNewActivityView: View {
         presentationMode.wrappedValue.dismiss()
     }
 
-    // TODO: Extend to check if numeric all strings aren't empty and valid
+    func checkAllInputFieldsAreEmpty() -> Bool {
+        for item in sets {
+            if item.0.isEmpty || item.1.isEmpty {
+                return true
+            }
+        }
+        return false
+    }
+
     func checkIsDisabled() -> Bool {
-        return sets.isEmpty
+        return sets.isEmpty || checkAllInputFieldsAreEmpty()
     }
 
     var body: some View {
@@ -22,7 +30,7 @@ struct CreateNewActivityView: View {
                 Form {
                     ForEach(0 ..< sets.count, id: \.self) { setNumber in
                         Section(header: Text("Set \(setNumber + 1)")) {
-                            TextField("Enter a weight...", text: $sets[setNumber].0)
+                            TextField("Enter a weight (kg)...", text: $sets[setNumber].0)
                             TextField("Enter a number of reps...", text: $sets[setNumber].1)
                             
                             Button("Remove set") {
