@@ -111,6 +111,8 @@ class Store: ObservableObject {
 
 }
 
+
+
 var workoutData: [Workout] = [
     .init(
         name: "Chest Press",
@@ -125,7 +127,7 @@ var workoutData: [Workout] = [
                     .init(weight: 5, reps: 12),
                     .init(weight: 5, reps: 12),
                 ],
-                date: Date.now
+                date: Date.distantPast
             ),
             .init(
                 sets: [
@@ -149,6 +151,7 @@ enum BodyPart: CaseIterable, Codable {
     case legs
     case shoulders
     case chest
+    case back
     case none
 
     var stringRepresentation: String {
@@ -161,7 +164,9 @@ enum BodyPart: CaseIterable, Codable {
             return "Shoulders"
         case .chest:
             return "Chest"
-        default:
+        case .back:
+            return "Back"
+        case .none:
             return ""
         }
 
@@ -177,9 +182,11 @@ enum BodyPart: CaseIterable, Codable {
             return "🙆"
         case .chest:
             return "🫁"
-        default:
-            return ""
-        }
+       case .back:
+           return "🦋"
+       case .none:
+           return ""
+       }
     }
 }
 
@@ -246,7 +253,7 @@ struct Activity: Identifiable, Hashable, Codable {
 
     struct ActivitySet: Identifiable, Hashable, Codable {
         var id = UUID()
-        var weight: Int
+        var weight: Double
         var reps: Int
     }
 
@@ -254,7 +261,7 @@ struct Activity: Identifiable, Hashable, Codable {
         let sum = sets.reduce(0) { partialResult, activitySet in
             partialResult + activitySet.weight
         }
-        return Double(sum / sets.count)
+        return Double(sum / Double(sets.count))
     }
 
     func getAverageReps() -> Double {
@@ -272,7 +279,13 @@ struct Workout: Identifiable, Hashable, Codable {
     var lastWorkOutDate: Date? {
         activities.isEmpty
         ? nil
-        : activities.first?.date
+        : sortedActivitiesByDate.first?.date
+    }
+
+    var sortedActivitiesByDate: [Activity] {
+        return activities.sorted { activity1, activity2 in
+            activity1.date > activity2.date
+        }
     }
 
     var bodyPart: BodyPart

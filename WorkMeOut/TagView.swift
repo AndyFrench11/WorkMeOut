@@ -21,16 +21,11 @@ struct TagView: View {
 }
 
 struct GroupedVariantTagView: View {
-    var bodyPart: BodyPart
     var focusType: FocusType
     var movementType: MovementType
 
     var body: some View {
         HStack(spacing: 4) {
-            TagView(
-                text: bodyPart.stringRepresentation,
-                emoji: bodyPart.emojiRepresentation
-            )
             TagView(
                 text: focusType.stringRepresentation,
                 emoji: focusType.emojiRepresentation

@@ -66,7 +66,7 @@ struct CreateNewWorkoutView: View {
                     }
                 }
 
-                Button("Create Activity") {
+                Button("Create Workout") {
                     store.createNewWorkout(
                         name: nameTextField,
                         bodyPart: bodyPartSelection,
@@ -82,7 +82,7 @@ struct CreateNewWorkoutView: View {
                 .disabled(checkIsDisabled())
 
             }
-            .navigationTitle("New Activity ✏️")
+            .navigationTitle("New Workout 💪")
         }
     }
 }

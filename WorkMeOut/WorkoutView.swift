@@ -12,16 +12,14 @@ struct WorkoutView: View {
         VStack(alignment: .leading, spacing: 0) {
 
             GroupedVariantTagView(
-                bodyPart: workout.bodyPart,
                 focusType: workout.focusType,
                 movementType: workout.movementType
             )
-                .padding(.horizontal, 16)
+                .padding(.leading, 16)
 
             if !workout.activities.isEmpty {
                 LineView(
                     data: workout.getAverageWeight(),
-                    title: "Latest Data",
                     legend: "Last exercised: \(workout.getLastWorkoutDateString())"
                 )
                     .padding(.horizontal, 16)
@@ -31,11 +29,12 @@ struct WorkoutView: View {
                 if workout.activities.isEmpty {
                     Text("There have been no activites yet.")
                 }
-                ForEach(workout.activities) { activity in
+
+                ForEach(workout.sortedActivitiesByDate) { activity in
                     HStack {
                         VStack(alignment: .leading) {
-                            Text("Average weight: ")
-                            Text("Average reps: ")
+                            Text("Avg. weight: ")
+                            Text("Avg. reps: ")
                         }
 
                         VStack(alignment: .leading) {
@@ -54,13 +53,15 @@ struct WorkoutView: View {
                                 .fontWeight(.bold)
                         }
                     }
+
                 }
                 .onDelete { offset in
                     store.removeActivity(workoutId: workoutId, offset: offset)
                 }
             }
+            .listStyle(.inset)
+            .padding(.top, 80)
             .frame(maxWidth: .infinity)
-            .padding(.top, 64)
         }
         .navigationTitle("\(workout.name)")
         .toolbar {

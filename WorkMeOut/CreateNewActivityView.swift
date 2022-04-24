@@ -31,14 +31,16 @@ struct CreateNewActivityView: View {
                     ForEach(0 ..< sets.count, id: \.self) { setNumber in
                         Section(header: Text("Set \(setNumber + 1)")) {
                             TextField("Enter a weight (kg)...", text: $sets[setNumber].0)
+                                .keyboardType(.decimalPad)
                             TextField("Enter a number of reps...", text: $sets[setNumber].1)
+                                .keyboardType(.numberPad)
                             
                             Button("Remove set") {
                                 sets.remove(at: setNumber)
                             }
                             .foregroundColor(.red)
                         }
-                        .keyboardType(.numberPad)
+
                     }
                     
 
@@ -51,7 +53,7 @@ struct CreateNewActivityView: View {
                     store.createNewActivity(
                         workoutId: workoutId,
                         sets: sets.map({ (weight, reps) in
-                            .init(weight: Int(weight)!, reps: Int(reps)!)
+                            .init(weight: Double(weight)!, reps: Int(reps)!)
                         })
                     )
                     dismissModal()
